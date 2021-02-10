@@ -396,8 +396,6 @@ void a3demo_loadShaders(a3_DemoState *demoState)
 	demoState->rendering_program = program;
 	glCreateVertexArrays(1, demoState->vertex_array_object);
 	glBindVertexArray(demoState->vertex_array_object);
-
-
 }
 
 

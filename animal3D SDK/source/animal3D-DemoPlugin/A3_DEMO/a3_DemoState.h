@@ -187,6 +187,8 @@ struct a3_DemoState
 	// ****TO-DO: 
 	//	-> add data members, the graphics handles from tutorial
 
+	GLuint vertex_array_object;
+	GLuint rendering_program;
 };
 
 

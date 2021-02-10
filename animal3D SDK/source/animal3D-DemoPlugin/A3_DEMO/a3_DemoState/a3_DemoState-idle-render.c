@@ -201,6 +201,10 @@ void a3demo_renderTest(a3_DemoState const* demoState, a3f64 const dt)
 	// ****TO-DO: render scene here
 	//	-> implement "render" from tutorial
 
+	const GLfloat color[] = { (float)sin(dt) * 0.5f + 0.5f,
+								(float)cos(dt) * 0.5f + 0.5f,
+								0.0f, 1.0f };
+	glClearBufferfv(GL_COLOR, 0, color);
 }
 
 void a3demo_render(a3_DemoState const* demoState, a3f64 const dt)

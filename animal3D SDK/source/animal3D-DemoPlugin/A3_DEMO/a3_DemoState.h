@@ -270,9 +270,9 @@ struct a3_DemoState
 	};
 
 
-	// ****TO-DO:
+	// ****DONE:
 	//	-> uncomment textures union
-/*	// textures
+	// textures
 	union {
 		a3_Texture texture[demoStateMaxCount_texture];
 		struct {
@@ -284,7 +284,7 @@ struct a3_DemoState
 				tex_testsprite[1],
 				tex_checker[1];
 		};
-	};*/
+	};
 
 
 	// managed objects, no touchie

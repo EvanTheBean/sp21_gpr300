@@ -191,7 +191,7 @@ void a3intro_render(a3_DemoState const* demoState, a3_DemoMode0_Intro const* dem
 	a3framebufferDeactivateSetViewport(a3fbo_depth24_stencil8,
 		-demoState->frameBorder, -demoState->frameBorder, demoState->frameWidth, demoState->frameHeight);
 
-	// ****TO-DO: 
+	// ****DONE: 
 	//	-> uncomment skybox or solid clear
 	// clear buffers
 	if (demoState->displaySkybox)
@@ -215,7 +215,7 @@ void a3intro_render(a3_DemoState const* demoState, a3_DemoMode0_Intro const* dem
 	//if (demoState->stencilTest)
 	//	a3demo_drawStencilTest(modelViewProjectionMat.m, viewProjectionMat.m, modelMat.m, demoState->prog_drawColorUnif, demoState->draw_unit_sphere);
 
-	// ****TO-DO: 
+	// ****DONE: 
 	//	-> uncomment shader program activation for current mode
 	// select program based on settings
 	currentDemoProgram = renderProgram[renderMode];
@@ -260,21 +260,24 @@ void a3intro_render(a3_DemoState const* demoState, a3_DemoMode0_Intro const* dem
 			// send lights and matrices, fall through to texturing
 			modelViewMat = currentSceneObject->modelMatrixStackPtr->modelViewMat;
 			a3shaderUniformSendFloatMat(a3unif_mat4, 0, currentDemoProgram->uMV, 1, modelViewMat.mm);
-			// ****TO-DO: 
+			// ****DONE: 
 			//	-> send "normal matrix": the inverse-transpose of the model-view matrix
 			//		(hint: the correct uniform location is in the shader header)
-
+			modelViewMat = currentSceneObject->modelMatrixStackPtr->modelMatInverseTranspose;
+			a3shaderUniformSendFloatMat(a3unif_mat4, 0, currentDemoProgram->uMV, 1, modelViewMat.mm);
 		case intro_renderModeTexture:
 			// activate diffuse map, fall through to solid color
-			// ****TO-DO: 
+			// ****DONE: 
 			//	-> activate diffuse texture on texture unit 0
-
+			a3textureActivate(texture_dm[j], a3tex_unit00);
 		case intro_renderModeSolid:
 			// send general matrix and color, end
-			// ****TO-DO: 
+			// ****DONE: 
 			//	-> send model-view-projection matrix
+			modelViewMat = currentSceneObject->modelMatrixStackPtr->modelViewProjectionMat;
+			a3shaderUniformSendFloatMat(a3unif_mat4, 0, currentDemoProgram->uMVP, 1, modelViewMat.mm);
 			//	-> send solid color (not a matrix)
-
+			a3shaderUniformSendFloat(a3unif_vec4, currentDemoProgram->uColor0, 1, rgba4[i].v);
 			break;
 		}
 		// ****DONE: 

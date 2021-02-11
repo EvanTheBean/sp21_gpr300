@@ -33,6 +33,8 @@ layout (location = 0) in vec4 aPosition;
 
 uniform mat4 uMVP; //model-view-projeciton matrix
 
+uniform vec4 uColor0;
+
 flat out int vVertexID;
 flat out int vInstanceID;
 

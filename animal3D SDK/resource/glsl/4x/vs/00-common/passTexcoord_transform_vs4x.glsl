@@ -22,6 +22,13 @@
 	Calculate final position and pass atlas texture coordinate.
 */
 
+/*
+	Modified By Evan Koppers
+		TexCoord Input and output
+		uMVP * aPosition
+	And Gavin Lechner
+*/
+
 #version 450
 
 // ****DONE: 

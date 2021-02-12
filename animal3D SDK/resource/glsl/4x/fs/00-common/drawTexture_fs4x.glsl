@@ -22,6 +22,13 @@
 	Output texture blended with color.
 */
 
+/*
+	Modified by Evan Koppers
+		Texture Mixing
+	And Gavin Lechner
+		Texture Input and Output
+*/
+
 #version 450
 
 // ****TO-DO: 

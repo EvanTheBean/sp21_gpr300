@@ -15,6 +15,12 @@
 */
 
 /*
+	Modified By Evan Koppers
+	And Gavin Lechner
+		Color Output
+*/
+
+/*
 	animal3D SDK: Minimal 3D Animation Framework
 	By Daniel S. Buckstein
 	

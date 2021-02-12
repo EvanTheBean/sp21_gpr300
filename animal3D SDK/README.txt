@@ -15,6 +15,13 @@
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
+	Modified by Evan Koppers and Gavin Lechner
+	for the purposes of an Assignment
+	Added Color and Texture shading, 
+	as well as doing all required prior steps to get those working
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
 	animal3D SDK: Minimal 3D Animation Framework
 	By Daniel S. Buckstein
 	

@@ -26,6 +26,13 @@
 	********************************************
 */
 
+/*
+	Modified By Evan Koppers
+		Uncommenting Code
+	And Gavin Lechner
+		Shader Switch Statement
+*/
+
 //-----------------------------------------------------------------------------
 
 #include "../a3_DemoMode0_Intro.h"

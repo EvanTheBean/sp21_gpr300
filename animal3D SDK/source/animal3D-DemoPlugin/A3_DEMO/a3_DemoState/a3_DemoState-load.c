@@ -28,6 +28,14 @@
 	****************************************************
 */
 
+/*
+	Modified By Evan Koppers
+		Set Up Shader Sources
+	And Gavin Lechner
+		Uncomment
+		Set Up Shader Sources
+*/
+
 #include "../_a3_demo_utilities/a3_DemoMacros.h"
 
 

@@ -22,6 +22,12 @@
 	Pass-thru GLSL vertex shader. Outputs transformed position attribute.
 */
 
+/*
+	Modified By Evan Koppers
+		Activity Done In Class
+	And Gavin Lechner
+*/
+
 #version 450
 
 // ****DONE: 

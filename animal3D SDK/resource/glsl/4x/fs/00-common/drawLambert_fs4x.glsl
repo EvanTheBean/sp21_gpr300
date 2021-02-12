@@ -15,6 +15,13 @@
 */
 
 /*
+	Modified By Evan Koppers
+		Wrote the framework
+	and Gavin Lechner
+		set up the uniforms
+*/
+
+/*
 	animal3D SDK: Minimal 3D Animation Framework
 	By Daniel S. Buckstein
 	

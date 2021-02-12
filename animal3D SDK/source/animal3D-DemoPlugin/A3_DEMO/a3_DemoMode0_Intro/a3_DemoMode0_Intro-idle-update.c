@@ -26,6 +26,12 @@
 	********************************************
 */
 
+/*
+	Modified By Evan Koppers
+		Animation Update For Every Object
+	And Gavin Lechner
+*/
+
 //-----------------------------------------------------------------------------
 
 #include "../a3_DemoMode0_Intro.h"

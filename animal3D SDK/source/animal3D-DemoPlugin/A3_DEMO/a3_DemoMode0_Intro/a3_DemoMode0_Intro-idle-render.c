@@ -127,7 +127,7 @@ void a3intro_render(a3_DemoState const* demoState, a3_DemoMode0_Intro const* dem
 	const a3_SceneObjectComponent* activeCameraObject = activeCamera->sceneObjectPtr;
 	const a3_SceneObjectComponent* currentSceneObject, * endSceneObject;
 
-	// ****TO-DO: 
+	// ****DONE: 
 	//	-> uncomment graphics object arrays
 	// temp drawable pointers
 	const a3_VertexDrawable* drawable[] = {

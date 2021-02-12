@@ -29,7 +29,7 @@
 //	-> declare lighting uniforms
 //		(hint: in the render routine, consolidate lighting data 
 //		into arrays; read them here as arrays)
-//	-> calculate Lambertian coefficient
+//	-> calculate Lambertian coefficient <-
 //	-> implement Lambertian shading model and assign to output
 //		(hint: coefficient * attenuation * light color * surface color)
 //	-> implement for multiple lights
@@ -41,6 +41,7 @@ in vec4 vPosition;
 in vec4 vNormal;
 
 uniform vec4 uLightPos; //camera
+uniform vec4 uColor0;
 
 void main()
 {
@@ -51,6 +52,8 @@ void main()
 	vec4 N = normalize(vNormal);
 	vec4 L = normalize(uLightPos-vPosition);
 	float kd = dot(N, L);
+
+	//smth ShadingModel = kd * LightsAttenuation * LightsColor * uColor0
 
 	//DEBUGGING
 	rtFragColor = vec4(kd, kd, kd, 1.0);

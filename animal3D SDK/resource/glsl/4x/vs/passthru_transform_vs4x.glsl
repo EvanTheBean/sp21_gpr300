@@ -42,9 +42,10 @@ void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
 	//gl_Position = aPosition;
-	gl_Position = uMVP * aPosition;
+	//gl_Position = uMVP * aPosition;
 	//RIGHT-TO-LEFT
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;
+	gl_Position = uMVP * aPosition;
 }

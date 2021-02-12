@@ -31,20 +31,21 @@
 //	-> get color from sampler at texture coordinate
 //	-> assign color to output
 
-in vec2 vTexcoord;
+layout (location = 0) out vec4 rtFragColor;
+
+flat in vec2 vTexcoord;
+uniform vec4 uColor0;
 
 flat in int vVertexID;
 flat in int vInstanceID;
 
-layout (location = 0) out vec4 rtFragColor;
-
-uniform sampler2D uSampler;
+uniform sampler2D uImage00;
 
 void main()
 {
 	// DUMMY OUTPUT: all fragments are OPAQUE YELLOW
 	//rtFragColor = vec4(1.0, 1.0, 0.0, 1.0);
-	vec4 pixelColour = texture2D(uSampler, vTexCoord);
+	vec4 pixelColor = texture2D(uImage00, vTexcoord);
+	pixelColor *= uColor0;
 	rtFragColor = pixelColor;
-
 }

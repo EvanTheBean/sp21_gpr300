@@ -33,7 +33,7 @@
 
 layout (location = 0) out vec4 rtFragColor;
 
-flat in vec2 vTexcoord;
+in vec2 vTexcoord;
 uniform vec4 uColor0;
 
 flat in int vVertexID;

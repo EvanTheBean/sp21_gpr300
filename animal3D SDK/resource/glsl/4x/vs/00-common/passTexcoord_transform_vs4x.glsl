@@ -37,7 +37,7 @@ layout (location = 0) in vec4 aPosition;
 
 layout (location = 8) in vec2 aTexcoord;
 
-flat out vec2 vTexcoord;
+out vec2 vTexcoord;
 
 flat out int vVertexID;
 flat out int vInstanceID;

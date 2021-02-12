@@ -93,8 +93,13 @@ extern "C"
 				ubTransformMVP;		// model-view-projection matrix block
 		};
 
-		// ****TO-DO: 
+		// ****DONE: 
 		//	-> add lighting uniform and block handles
+		struct {
+			a3i32
+				uAttenuation,
+				uLightColor;
+		};
 
 	};
 

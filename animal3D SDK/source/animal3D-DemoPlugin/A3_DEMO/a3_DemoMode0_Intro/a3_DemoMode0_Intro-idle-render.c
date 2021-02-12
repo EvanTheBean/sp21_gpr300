@@ -233,8 +233,12 @@ void a3intro_render(a3_DemoState const* demoState, a3_DemoMode0_Intro const* dem
 	if (demoState->updateAnimation)
 		a3shaderUniformSendDouble(a3unif_single, currentDemoProgram->uTime, 1, &demoState->timer_display->totalTime);
 
-	// ****TO-DO: 
+	// ****DONE: 
 	//	-> send lighting uniforms and bind blocks where appropriate
+	/*
+	a3shaderUniformSendDouble(a3unif_single, currentDemoProgram->uAttenuation, 1, currentSceneObject->modelMatrixStackPtr.);
+	a3shaderUniformSendFloat(a3unif_vec4, currentDemoProgram->uLightColor, 1, );
+	*/
 
 
 	// select pipeline algorithm

@@ -43,6 +43,11 @@ in vec4 vNormal;
 uniform vec4 uLightPos; //camera
 uniform vec4 uColor0;
 
+uniform float uAttenuation;
+uniform vec4 uLightColor;
+
+uniform sampler2D uImage00;
+
 void main()
 {
 	// DUMMY OUTPUT: all fragments are OPAQUE LIME
@@ -53,8 +58,10 @@ void main()
 	vec4 L = normalize(uLightPos-vPosition);
 	float kd = dot(N, L);
 
-	//smth ShadingModel = kd * LightsAttenuation * LightsColor * uColor0
+	vec4 shadingModel = kd * uAttenuation * uLightColor * uColor0;
 
 	//DEBUGGING
-	rtFragColor = vec4(kd, kd, kd, 1.0);
+	//vec4 pixelColor = texture2D(uImage00, vTexcoord);
+	//pixelColor *= uColor0;
+	rtFragColor = shadingModel;
 }

@@ -929,10 +929,10 @@ void a3demo_loadValidate(a3_DemoState* demoState)
 		* const endUBO = currentUBO + demoStateMaxCount_uniformBuffer;
 	a3_Texture* currentTex = demoState->texture,
 		* const endTex = currentTex + demoStateMaxCount_texture;
-	// ****TO-DO:
+	// ****DONE:
 	//	-> uncomment framebuffer pointers
-/*	a3_Framebuffer* currentFBO = demoState->framebuffer,
-		* const endFBO = currentFBO + demoStateMaxCount_framebuffer;*/
+	a3_Framebuffer* currentFBO = demoState->framebuffer,
+		* const endFBO = currentFBO + demoStateMaxCount_framebuffer;
 
 	// set pointers to appropriate release callback for different asset types
 	while (currentBuff < endBuff)
@@ -945,10 +945,10 @@ void a3demo_loadValidate(a3_DemoState* demoState)
 		a3bufferHandleUpdateReleaseCallback(currentUBO++);
 	while (currentTex < endTex)
 		a3textureHandleUpdateReleaseCallback(currentTex++);
-	// ****TO-DO:
+	// ****DONE:
 	//	-> uncomment framebuffer update
-/*	while (currentFBO < endFBO)
-		a3framebufferHandleUpdateReleaseCallback(currentFBO++);*/
+	while (currentFBO < endFBO)
+		a3framebufferHandleUpdateReleaseCallback(currentFBO++);
 
 	// re-link specific object pointers for different asset types
 	currentBuff = demoState->vbo_staticSceneObjectDrawBuffer;

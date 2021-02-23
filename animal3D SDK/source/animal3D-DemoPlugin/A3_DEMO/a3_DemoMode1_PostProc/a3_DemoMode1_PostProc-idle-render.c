@@ -281,11 +281,11 @@ void a3postproc_render(a3_DemoState const* demoState, a3_DemoMode1_PostProc cons
 	//		- clear depth buffer
 	//		- render shapes using pass-thru shaders
 
-	// ****TO-DO:
+	// ****DONE:
 	//	-> uncomment shadow pass FBO binding
-/*	// bind scene FBO
+	// bind scene FBO
 	currentWriteFBO = writeFBO[postproc_renderPassShadow]; //demoState->fbo_d32
-	a3framebufferActivate(currentWriteFBO);*/
+	a3framebufferActivate(currentWriteFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	currentDemoProgram = demoState->prog_transform;
@@ -318,11 +318,11 @@ void a3postproc_render(a3_DemoState const* demoState, a3_DemoMode1_PostProc cons
 	//		- render shapes using appropriate shaders
 	//		- capture color and depth
 
-	// ****TO-DO:
+	// ****DONE:
 	//	-> uncomment scene pass FBO binding
-/*	// bind scene FBO
+	// bind scene FBO
 	currentWriteFBO = writeFBO[postproc_renderPassScene]; //demoState->fbo_c16x4_d24s8
-	a3framebufferActivate(currentWriteFBO);*/
+	a3framebufferActivate(currentWriteFBO);
 
 	// clear buffers
 	if (demoState->displaySkybox)
@@ -378,9 +378,9 @@ void a3postproc_render(a3_DemoState const* demoState, a3_DemoMode1_PostProc cons
 		// activate texture maps
 		a3textureActivate(texture_dm[j], a3tex_unit00);
 		a3textureActivate(texture_sm[j], a3tex_unit01);
-		// ****TO-DO:
+		// ****DONE:
 		//	-> uncomment shadow map bind
-	/*	a3framebufferBindDepthTexture(writeFBO[postproc_renderPassShadow], a3tex_unit06); //demoState->fbo_d32*/
+		a3framebufferBindDepthTexture(writeFBO[postproc_renderPassShadow], a3tex_unit06); //demoState->fbo_d32
 
 		// send other data
 		a3shaderUniformSendInt(a3unif_single, currentDemoProgram->uIndex, 1, &j);

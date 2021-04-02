@@ -28,7 +28,7 @@
 //	-> DONE: declare inbound and outbound varyings to pass along vertex data
 //		(hint: inbound matches TCS naming and is still an array)
 //		(hint: outbound matches GS/FS naming and is singular)
-//	-> DONE?: copy varying data from input to output
+//	-> DONE: copy varying data from input to output
 //	-> displace surface along normal using height map, project result
 //		(hint: start by testing a "pass-thru" shader that only copies 
 //		gl_Position from the previous stage to get the hang of it)
@@ -47,6 +47,10 @@ out vbVertexData {
 
 void main()
 {
+	vbVertexData.vTangentBasis_view = vbVertexData_tess[gl_TessCoord].vTangentBasis_view;
+	vbVertexData.vTexcoord_atlas = vbVertexData_tess[gl_TessCoord].vTexcoord_atlas;
+
+
 	//gl_TessCoord -> barycentric
 	//gl_Position = ???
 }

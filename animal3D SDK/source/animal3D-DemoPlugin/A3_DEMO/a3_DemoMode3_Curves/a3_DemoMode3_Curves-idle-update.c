@@ -53,7 +53,7 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 	{
 		a3_SceneObjectData* sceneObjectData = demoMode->obj_teapot->dataPtr;
 
-		// ****TO-DO: 
+		// ****DONE: 
 		//	-> interpolate teapot's position using algorithm that matches path drawn
 		//		(hint: use the one that looks the best)
 		//	-> update the animation timer
@@ -72,6 +72,30 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 
 			interpolation along the path
 		*/
+
+		float dur = demoMode->curveSegmentDuration;
+		demoMode->curveSegmentTime += dt;
+		int iS, iE;
+		//demoMode->curveWaypointCount;
+
+		iS = demoMode->curveSegmentIndex;
+		iE = (iS + 1) % demoMode->curveWaypointCount;
+
+		if (demoMode->curveSegmentTime >= dur)
+		{
+			demoMode->curveSegmentTime -= dur;
+			iS = iE;
+			iE = (iS + 1) % demoMode->curveWaypointCount;
+		}
+
+		demoMode->curveSegmentIndex = iS; //update variable for use next time round
+		float t = demoMode->curveSegmentTime; //change to t variable for readability
+
+		float h1 = pow((2 * t), 3.0) - pow((3 * t), 2.0) + 1.0;
+		float h2 = -pow((2 * t), 3.0) + pow((3 * t), 2.0);
+		float h3 = pow(t, 3.0) - pow((2 * t), 2.0) + t;
+		float h4 = pow(t, 3.0) - pow(t, 2.0);
+		sceneObjectData->position = (h1 * demoMode->curveWaypoint[iS]) + h2 * demoMode->curveWaypoint[iE] + h3 * demoMode->curveTangent[iS] + h4 * demoMode->curveTangent[iE];
 	}
 }
 

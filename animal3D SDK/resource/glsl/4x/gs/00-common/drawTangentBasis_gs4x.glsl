@@ -26,28 +26,61 @@
 #version 450
 
 // ****TO-DO: 
-//	-> declare varying data to read from vertex shader
+//	-> DONE: declare varying data to read from vertex shader
 //		(hint: it's an array this time, one per vertex in primitive)
 //	-> use vertex data to generate lines that highlight the input triangle
-//		-> wireframe: one at each corner, then one more at the first corner to close the loop
+//		-> DONE: wireframe: one at each corner, then one more at the first corner to close the loop
 //		-> vertex tangents: for each corner, new vertex at corner and another extending away 
 //			from it in the direction of each basis (tangent, bitangent, normal)
 //		-> face tangents: ditto but at the center of the face; need to calculate new bases
-//	-> call "EmitVertex" whenever you're done with a vertex
+//	-> call "EmitVertex" whenever you're done with a vertex (done, for wireframe)
 //		(hint: every vertex needs gl_Position set)
-//	-> call "EndPrimitive" to finish a new line and restart
+//	-> call "EndPrimitive" to finish a new line and restart (done, for wireframe)
 //	-> experiment with different geometry effects
 
 // (2 verts/axis * 3 axes/basis * (3 vertex bases + 1 face basis) + 4 to 8 wireframe verts = 28 to 32 verts)
 #define MAX_VERTICES 32
 
 layout (triangles) in;
+//gl_in[3]
+
+in vbVertexData{
+	mat4 vTangentBasis_view;
+	vec4 vTexcoord_atlas;
+} vVertexData[];
 
 layout (line_strip, max_vertices = MAX_VERTICES) out;
 
 out vec4 vColor;
 
+void drawWireFrame()
+{
+	//get vertex info
+	//v0, v1, v2, v0
+
+	vColor = vec4(1.0,0.0,0.0,1.0);
+	gl_Position = gl_in[0].gl_Position;
+	EmitVertex();
+	gl_Position = gl_in[1].gl_Position;
+	EmitVertex();
+	EndPrimitive();
+
+	vColor = vec4(0.0,1.0,0.0,1.0);
+	gl_Position = gl_in[1].gl_Position;
+	EmitVertex();
+	gl_Position = gl_in[2].gl_Position;
+	EmitVertex();
+	EndPrimitive();
+
+	vColor = vec4(0.0,0.0,1.0,1.0);
+	gl_Position = gl_in[2].gl_Position;
+	EmitVertex();
+	gl_Position = gl_in[0].gl_Position;
+	EmitVertex();
+	EndPrimitive();
+}
+
 void main()
 {
-	
+	drawWireFrame();
 }

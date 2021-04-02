@@ -60,6 +60,18 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 		//		(hint: check if we've surpassed the segment's duration)
 		// teapot follows curved path
 
+		/*
+			t+=dt
+			if(t>=dur)
+			{
+				t -= dur
+				iS = iE
+				iE = (iS + 1)%c
+			}
+			u = t/dur = t(1/dur)
+
+			interpolation along the path
+		*/
 	}
 }
 

@@ -24,18 +24,28 @@
 
 #version 450
 
-// ****TO-DO: 
-//	-> declare inbound and outbound varyings to pass along vertex data
+// ****TO-DO:
+//	-> DONE: declare inbound and outbound varyings to pass along vertex data
 //		(hint: inbound matches TCS naming and is still an array)
 //		(hint: outbound matches GS/FS naming and is singular)
-//	-> copy varying data from input to output
+//	-> DONE?: copy varying data from input to output
 //	-> displace surface along normal using height map, project result
 //		(hint: start by testing a "pass-thru" shader that only copies 
 //		gl_Position from the previous stage to get the hang of it)
 
 layout (triangles, equal_spacing) in;
 
+in vbVertexData_tess {
+	mat4 vTangentBasis_view;
+	vec4 vTexcoord_atlas;
+} vVertexData_tess[];
+
+out vbVertexData {
+	mat4 vTangentBasis_view;
+	vec4 vTexcoord_atlas;
+};
+
 void main()
 {
-	
+	//gl_Position = ???
 }

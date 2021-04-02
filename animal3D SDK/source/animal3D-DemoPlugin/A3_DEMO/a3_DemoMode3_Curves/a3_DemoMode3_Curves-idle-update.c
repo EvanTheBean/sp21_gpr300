@@ -38,6 +38,8 @@
 
 #include "../_a3_demo_utilities/a3_DemoMacros.h"
 
+//#include <cmath>
+
 
 //-----------------------------------------------------------------------------
 // UPDATE
@@ -92,13 +94,17 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 		}
 
 		demoMode->curveSegmentIndex = iS; //update variable for use next time round
-		float t = demoMode->curveSegmentTime; //change to t variable for readability
+		float u = demoMode->curveSegmentTime/dur; //change to t variable for readability
 
-		float h1 = pow((2 * t), 3.0) - pow((3 * t), 2.0) + 1.0;
-		float h2 = -pow((2 * t), 3.0) + pow((3 * t), 2.0);
-		float h3 = pow(t, 3.0) - pow((2 * t), 2.0) + t;
-		float h4 = pow(t, 3.0) - pow(t, 2.0);
+		//sceneObjectData->position = demoMode->curveWaypoint[iS] + (demoMode->curveWaypoint[iE] - demoMode->curveWaypoint[iS]) * u;
+
+		
+		float h1 = pow((2 * u), 3.0) - pow((3 * u), 2.0) + 1.0;
+		float h2 = -pow((2 * u), 3.0) + pow((3 * u), 2.0);
+		float h3 = pow(u, 3.0) - pow((2 * u), 2.0) + u;
+		float h4 = pow(u, 3.0) - pow(u, 2.0);
 		sceneObjectData->position = (h1 * demoMode->curveWaypoint[iS]) + h2 * demoMode->curveWaypoint[iE] + h3 * demoMode->curveTangent[iS] + h4 * demoMode->curveTangent[iE];
+		
 	}
 }
 

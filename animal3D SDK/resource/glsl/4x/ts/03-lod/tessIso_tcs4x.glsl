@@ -22,6 +22,11 @@
 	Basic tessellation control for isolines.
 */
 
+/*
+	Edited by Evan Koppers
+	And Gavin Lechner
+*/
+
 #version 450
 
 // ****DONE: 

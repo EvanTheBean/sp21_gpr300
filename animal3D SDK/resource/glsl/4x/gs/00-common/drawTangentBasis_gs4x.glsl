@@ -23,6 +23,11 @@
 		determined by flag passed to program.
 */
 
+/*
+	Edited by Evan Koppers
+	And Gavin Lechner
+*/
+
 #version 450
 
 // ****TO-DO: 

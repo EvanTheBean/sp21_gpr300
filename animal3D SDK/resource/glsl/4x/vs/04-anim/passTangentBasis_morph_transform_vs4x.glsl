@@ -34,11 +34,22 @@
 //		(hint: results can be stored in local variables named after the 
 //		complete tangent basis attributes provided before any changes)
 
+/*
 layout (location = 0) in vec4 aPosition;
 layout (location = 2) in vec3 aNormal;
 layout (location = 8) in vec4 aTexcoord;
 layout (location = 10) in vec3 aTangent;
 layout (location = 11) in vec3 aBitangent;
+*/
+
+//atts in loading
+//what is part of a single morph target:
+//	-> position, normal, tangent
+//	-> 16 available, 16/3 = 5 (int) (add texcoord)
+
+//what is not part of a single morph target:
+//	-> texcoord - shared, because its 2D, doesnt change from pose, always the same
+//	-> bitangent - cross product (normal x tangent) 
 
 struct sModelMatrixStack
 {
@@ -71,6 +82,14 @@ void main()
 	// DUMMY OUTPUT: directly assign input position to output position
 	//gl_Position = aPosition;
 	
+
+	// results of morphing
+	vec4 aPosition;
+	vec3 aTangent, aBitangent, aNormal;
+
+	//testing: copy the first morph target only
+
+
 	sModelMatrixStack t = uModelMatrixStack[uIndex];
 	
 	vTangentBasis_view = t.modelViewMatInverseTranspose * mat4(aTangent, 0.0, aBitangent, 0.0, aNormal, 0.0, vec4(0.0));

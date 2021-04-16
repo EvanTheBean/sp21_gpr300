@@ -54,12 +54,13 @@ layout (location = 11) in vec3 aBitangent;
 struct sMorphTarget
 {
 	vec4 position;
-	vec4 normal;	float nPad;
-	vec4 tangent;	float tPad;
+	vec4 normal;
+	vec4 tangent;
 };
 
 layout (location = 0) in sMorphTarget aMorphTarget[5];
 //texcoord
+layout (location = 15) in vec4 aTexcoord;
 
 struct sModelMatrixStack
 {
@@ -79,6 +80,19 @@ uniform ubTransformStack
 };
 uniform int uIndex;
 
+//demoMode->animMorphTeapot
+struct a3_KeyframeController
+{
+	float duration;
+	float durationInv;
+	float time, param;
+	int index, count;
+};
+
+//layout (location = 1) in a3_KeyframeController animMorphTeapot[1];
+
+uniform float uTime;
+
 out vbVertexData {
 	mat4 vTangentBasis_view;
 	vec4 vTexcoord_atlas;
@@ -91,14 +105,25 @@ void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
 	//gl_Position = aPosition;
-	
 
 	// results of morphing
 	vec4 aPosition;
 	vec3 aTangent, aBitangent, aNormal;
 
+	int index = int(uTime);// % 5;
+	float param = uTime - index;
+	index = index % 5;
+
 	//testing: copy the first morph target only
 
+	//float regulatedTime = animMorphTeapot[0].time/animMorphTeapot[0].duration;
+
+	aPosition = mix(aMorphTarget[index].position,aMorphTarget[(index+1)%5].position,param);
+	vec4 tangentMix = mix(aMorphTarget[index].tangent,aMorphTarget[(index+1)%5].tangent,param);
+	aTangent = vec3(tangentMix.x, tangentMix.y,tangentMix.z);
+	vec4 normalMix = mix(aMorphTarget[index].normal,aMorphTarget[(index+1)%5].normal,param);
+	aNormal = vec3(normalMix.x, normalMix.y,normalMix.z);
+	aBitangent = cross(aNormal, aTangent);
 
 	sModelMatrixStack t = uModelMatrixStack[uIndex];
 	

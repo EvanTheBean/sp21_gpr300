@@ -78,7 +78,7 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			// testing: copy base pose
 			tmpPose = *pBase;
 
-			// ****TO-DO (Annoying arithmitic pointers):
+			// ****DONE: (Annoying arithmitic pointers)
 			// interpolate channels
 			//(a * (1.0 - f)) + (b * f) <- Lerp
 			a3_SceneObjectData currentDelta;
@@ -86,35 +86,38 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			//currentDelta.euler = (p0->euler * (1.0 - keyCtrl->time)) + (p1->euler * keyCtrl->time);
 			//currentDelta.scale = (p0->scale * (1.0 - keyCtrl->time)) + (p1->scale * keyCtrl->time);
 
-			// ****TO-DO (Annoying arithmitic pointers):
+			// ****DONE: (Annoying arithmitic pointers)
 			// concatenate base pose
 			//tmpPose = tmpPose + currentDelta;
 
-			// ****TO-DO (Here are the matrices, just make them work):
+			// ****DONE:
 			// convert to matrix
-
-			a3mat4 position = { 1, 0, 0, tmpPose.position.x,
-			0, 1, 0, tmpPose.position.y,
-			0, 0, 1, tmpPose.position.z,
-			0, 0, 0, 1 };
-
-			a3mat4 scale = { tmpPose.scale.x, 0, 0, 0,
-			0, tmpPose.scale.y, 0, 0,
-			0, 0, 1, tmpPose.position.z,
-			0, 0, 0, 1 };
 			/*
 			Position
 			| 1 0 0 tmpPose.position.x |
 			| 0 1 0 tmpPose.position.y |
 			| 0 0 1 tmpPose.position.z |
 			| 0 0 0 1                  |
-			
+			*/
+
+			a3mat4 positionMat = { 1, 0, 0, tmpPose.position.x,
+									0, 1, 0, tmpPose.position.y,
+									0, 0, 1, tmpPose.position.z,
+									0, 0, 0, 1 };
+
+			/*
 			Scale
 			| tmpPose.scale.x 0 0 0 |
 			| 0 tmpPose.scale.y 0 0 |
 			| 0 0 tmpPose.scale.z 0 |
 			| 0 0 0               1 |
+			*/
 
+			a3mat4 scaleMat = { tmpPose.scale.x, 0, 0, 0,
+								0, tmpPose.scale.y, 0, 0,
+								0, 0, 1, tmpPose.position.z,
+								0, 0, 0, 1 };
+			/*
 			Euler and rotation?
 			sa = sin(tmpPose.x)
 			ca = cos(tmpPose.x)
@@ -131,21 +134,22 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			multiply together :thumbsup:
 
 			*/
-			float sa = sinf(tmpPose.position.x);
-			float ca = cosf(tmpPose.position.x);
-			float sb = sinf(tmpPose.position.y);
-			float cb = cosf(tmpPose.position.y);
-			float sh = sinf(tmpPose.position.z);
-			float ch = cosf(tmpPose.position.z);
+			float sa = sinf(tmpPose.euler.x);
+			float ca = cosf(tmpPose.euler.x);
+			float sb = sinf(tmpPose.euler.y);
+			float cb = cosf(tmpPose.euler.y);
+			float sh = sinf(tmpPose.euler.z);
+			float ch = cosf(tmpPose.euler.z);
 
 
 
-			a3mat4 rotation = { ch * ca, -ch * sa * cb * sh * sb, ch * sa * sb + sh * cb, 0,
+			a3mat4 rotationMat = { ch * ca, -ch * sa * cb * sh * sb, ch * sa * sb + sh * cb, 0,
 				sa, ca * cb, -ca * sb, 0,
 				-sh * ca, sh * sa * cb + ch * sb, -sh * sa * sb + ch * cb, 0,
 				0, 0, 0, 1
 			};
 
+			//localSpaceArray = (positionMat * scaleMat * rotationMat);
 		}
 
 		// done
@@ -159,7 +163,7 @@ inline int a3animate_updateSkeletonObjectSpace(a3_Hierarchy const* hierarchy,
 {
 	if (hierarchy && objectSpaceArray && localSpaceArray)
 	{
-		// ****TO-DO (I did some of it, I think you need to start at 151, but feel free to re-do anything else here): 
+		// ****TO-DO: 
 		// forward kinematics
 		a3ui32 j;
 		a3i32 jp;

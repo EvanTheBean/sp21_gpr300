@@ -29,7 +29,7 @@
 //-----------------------------------------------------------------------------
 
 #include "../a3_DemoMode4_Animate.h"
-
+#include <math.h>
 //typedef struct a3_DemoState a3_DemoState;
 #include "../a3_DemoState.h"
 
@@ -93,6 +93,15 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			// ****TO-DO (Here are the matrices, just make them work):
 			// convert to matrix
 
+			a3mat4 position = { 1, 0, 0, tmpPose.position.x,
+			0, 1, 0, tmpPose.position.y,
+			0, 0, 1, tmpPose.position.z,
+			0, 0, 0, 1 };
+
+			a3mat4 scale = { tmpPose.scale.x, 0, 0, 0,
+			0, tmpPose.scale.y, 0, 0,
+			0, 0, 1, tmpPose.position.z,
+			0, 0, 0, 1 };
 			/*
 			Position
 			| 1 0 0 tmpPose.position.x |
@@ -122,6 +131,20 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			multiply together :thumbsup:
 
 			*/
+			float sa = sinf(tmpPose.position.x);
+			float ca = cosf(tmpPose.position.x);
+			float sb = sinf(tmpPose.position.y);
+			float cb = cosf(tmpPose.position.y);
+			float sh = sinf(tmpPose.position.z);
+			float ch = cosf(tmpPose.position.z);
+
+
+
+			a3mat4 rotation = { ch * ca, -ch * sa * cb * sh * sb, ch * sa * sb + sh * cb, 0,
+				sa, ca * cb, -ca * sb, 0,
+				-sh * ca, sh * sa * cb + ch * sb, -sh * sa * sb + ch * cb, 0,
+				0, 0, 0, 1
+			};
 
 		}
 

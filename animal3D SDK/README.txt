@@ -22,6 +22,12 @@
 	Some useful information about your animal3D distribution.
 -------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------
+	Edited by Evan Koppers
+	and Gavin Lechner
+	for the purposes of an assigment
+-------------------------------------------------------------------------------
+
 Welcome to "animal3D", the minimal 3D animation framework! This file has some 
 useful information about developing with animal3D.
 

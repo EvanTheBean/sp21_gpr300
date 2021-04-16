@@ -26,6 +26,12 @@
 	********************************************
 */
 
+/*
+	Edited by Evan Koppers
+	and Gavin Lecher 
+	for the purposes of an assignment
+*/
+
 //-----------------------------------------------------------------------------
 
 #include "../a3_DemoMode4_Animate.h"
@@ -81,7 +87,8 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			// ****DONE: (Annoying arithmitic pointers)
 			// interpolate channels
 			//(a * (1.0 - f)) + (b * f) <- Lerp
-			a3_SceneObjectData currentDelta;
+
+			//a3_SceneObjectData currentDelta;
 			//currentDelta.position = (p0->position * (1.0 - keyCtrl->time)) + (p1->position * keyCtrl->time);
 			//currentDelta.euler = (p0->euler * (1.0 - keyCtrl->time)) + (p1->euler * keyCtrl->time);
 			//currentDelta.scale = (p0->scale * (1.0 - keyCtrl->time)) + (p1->scale * keyCtrl->time);

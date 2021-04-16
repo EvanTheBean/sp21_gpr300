@@ -22,6 +22,12 @@
 	Calculate and pass morphed tangent basis.
 */
 
+/*
+	Edited by Evan Koppers
+	and Gavin Lecher 
+	for the purposes of an assignment
+*/
+
 #version 450
 
 #define MAX_OBJECTS 128
@@ -42,7 +48,7 @@ layout (location = 10) in vec3 aTangent;
 layout (location = 11) in vec3 aBitangent;
 */
 
-//atts in loading
+//thats in loading
 //what is part of a single morph target:
 //	-> position, normal, tangent
 //	-> 16 available, 16/3 = 5 (int) (add texcoord)

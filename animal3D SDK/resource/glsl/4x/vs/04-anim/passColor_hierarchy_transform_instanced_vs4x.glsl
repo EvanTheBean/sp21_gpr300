@@ -22,6 +22,12 @@
 	Transform position attribute for instance and pass hierarchical color.
 */
 
+/*
+	Edited by Evan Koppers
+	and Gavin Lecher
+	for the purposes of an assignment
+*/
+
 #version 450
 
 #define MAX_INSTANCES 128

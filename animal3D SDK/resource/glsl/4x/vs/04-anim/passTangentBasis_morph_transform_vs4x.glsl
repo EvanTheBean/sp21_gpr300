@@ -51,6 +51,16 @@ layout (location = 11) in vec3 aBitangent;
 //	-> texcoord - shared, because its 2D, doesnt change from pose, always the same
 //	-> bitangent - cross product (normal x tangent) 
 
+struct sMorphTarget
+{
+	vec4 position;
+	vec4 normal;	float nPad;
+	vec4 tangent;	float tPad;
+};
+
+layout (location = 0) in sMorphTarget aMorphTarget[5];
+//texcoord
+
 struct sModelMatrixStack
 {
 	mat4 modelMat;						// model matrix (object -> world)

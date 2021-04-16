@@ -26,7 +26,7 @@
 
 #define MAX_OBJECTS 128
 
-// ****TO-DO: 
+// ****DONE: 
 //	-> declare morph target attributes
 //	-> declare and implement morph target interpolation algorithm
 //	-> declare interpolation time/param/keyframe uniform
@@ -80,17 +80,6 @@ uniform ubTransformStack
 };
 uniform int uIndex;
 
-//demoMode->animMorphTeapot
-struct a3_KeyframeController
-{
-	float duration;
-	float durationInv;
-	float time, param;
-	int index, count;
-};
-
-//layout (location = 1) in a3_KeyframeController animMorphTeapot[1];
-
 uniform float uTime;
 
 out vbVertexData {
@@ -113,10 +102,6 @@ void main()
 	int index = int(uTime);// % 5;
 	float param = uTime - index;
 	index = index % 5;
-
-	//testing: copy the first morph target only
-
-	//float regulatedTime = animMorphTeapot[0].time/animMorphTeapot[0].duration;
 
 	aPosition = mix(aMorphTarget[index].position,aMorphTarget[(index+1)%5].position,param);
 	vec4 tangentMix = mix(aMorphTarget[index].tangent,aMorphTarget[(index+1)%5].tangent,param);

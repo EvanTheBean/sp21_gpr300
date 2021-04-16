@@ -78,14 +78,50 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			// testing: copy base pose
 			tmpPose = *pBase;
 
-			// ****TO-DO:
+			// ****TO-DO (Annoying arithmitic pointers):
 			// interpolate channels
+			//(a * (1.0 - f)) + (b * f) <- Lerp
+			a3_SceneObjectData currentDelta;
+			//currentDelta.position = (p0->position * (1.0 - keyCtrl->time)) + (p1->position * keyCtrl->time);
+			//currentDelta.euler = (p0->euler * (1.0 - keyCtrl->time)) + (p1->euler * keyCtrl->time);
+			//currentDelta.scale = (p0->scale * (1.0 - keyCtrl->time)) + (p1->scale * keyCtrl->time);
 
-			// ****TO-DO:
+			// ****TO-DO (Annoying arithmitic pointers):
 			// concatenate base pose
+			//tmpPose = tmpPose + currentDelta;
 
-			// ****TO-DO:
+			// ****TO-DO (Here are the matrices, just make them work):
 			// convert to matrix
+
+			/*
+			Position
+			| 1 0 0 tmpPose.position.x |
+			| 0 1 0 tmpPose.position.y |
+			| 0 0 1 tmpPose.position.z |
+			| 0 0 0 1                  |
+			
+			Scale
+			| tmpPose.scale.x 0 0 0 |
+			| 0 tmpPose.scale.y 0 0 |
+			| 0 0 tmpPose.scale.z 0 |
+			| 0 0 0               1 |
+
+			Euler and rotation?
+			sa = sin(tmpPose.x)
+			ca = cos(tmpPose.x)
+			sb = sin(tmpPose.y)
+			cb = cos(tmpPose.y)
+			sh = sin(tmpPose.z)
+			ch = cos(tmpPose.z)
+
+			| ch*ca  -ch*sa*cb+sh*sb ch*sa*sb+sh*cb  0 |
+			| sa     ca*cb           -ca*sb          0 |
+			| -sh*ca sh*sa*cb+ch*sb  -sh*sa*sb+ch*cb 0 |
+			| 0      0               0               1 |
+
+			multiply together :thumbsup:
+
+			*/
 
 		}
 
@@ -100,10 +136,25 @@ inline int a3animate_updateSkeletonObjectSpace(a3_Hierarchy const* hierarchy,
 {
 	if (hierarchy && objectSpaceArray && localSpaceArray)
 	{
-		// ****TO-DO: 
+		// ****TO-DO (I did some of it, I think you need to start at 151, but feel free to re-do anything else here): 
 		// forward kinematics
-		//a3ui32 j;
-		//a3i32 jp;
+		a3ui32 j;
+		a3i32 jp;
+		for (j = 0; j < hierarchy->numNodes; j++)
+		{
+			jp = hierarchy->nodes[j].parentIndex;
+			if (jp == -1)
+			{
+				objectSpaceArray[j] = localSpaceArray[j];
+				continue;
+			}
+
+			//worldspace of each node
+
+			//local transform relative to parent
+			//multiply by global/object transform of parent
+			a3real4x4Product(objectSpaceArray[j].m, objectSpaceArray[jp].m, localSpaceArray[j].m);
+		}
 
 		// done
 		return 1;

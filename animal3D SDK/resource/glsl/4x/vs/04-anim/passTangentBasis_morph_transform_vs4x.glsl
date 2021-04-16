@@ -104,10 +104,8 @@ void main()
 	index = index % 5;
 
 	aPosition = mix(aMorphTarget[index].position,aMorphTarget[(index+1)%5].position,param);
-	vec4 tangentMix = mix(aMorphTarget[index].tangent,aMorphTarget[(index+1)%5].tangent,param);
-	aTangent = vec3(tangentMix.x, tangentMix.y,tangentMix.z);
-	vec4 normalMix = mix(aMorphTarget[index].normal,aMorphTarget[(index+1)%5].normal,param);
-	aNormal = vec3(normalMix.x, normalMix.y,normalMix.z);
+	aTangent = mix(aMorphTarget[index].tangent,aMorphTarget[(index+1)%5].tangent,param).xyz;
+	aNormal = mix(aMorphTarget[index].normal,aMorphTarget[(index+1)%5].normal,param).xyz;
 	aBitangent = cross(aNormal, aTangent);
 
 	sModelMatrixStack t = uModelMatrixStack[uIndex];
